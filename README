@@ -1,0 +1,3 @@
+The elvis project provides a simple Tomcat Realm implementation that
+uses ACLS as the back-end authentication provider.  Versions for Tomcat 6
+and Tomcat 7 are provided.
