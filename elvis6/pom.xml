@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>au.edu.uq.cmm</groupId>
+	<artifactId>elvis6</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>The Elvis realm manager</name>
+	<description>This implements a bridge from a Tomcat authentication Realm to ACLS via the ACLS login protocol</description>
+
+	<inceptionYear>March 2012</inceptionYear>
+	<contributors>
+		<contributor>
+			<name>Stephen Crawley</name>
+		</contributor>
+	</contributors>
+	<licenses>
+		<license>
+			<name>Apache 2.0</name>
+		</license>
+	</licenses>
+	<dependencies>
+		<dependency>
+			<groupId>au.edu.uq.cmm</groupId>
+			<artifactId>aclslib</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>juli</artifactId>
+			<version>6.0.35</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>catalina</artifactId>
+			<version>6.0.35</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>elvis6</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.4</source>
+					<target>1.4</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<excludes>
+									<exclude>junit:junit</exclude>
+									<exclude>org.apache.tomcat:*</exclude>
+								</excludes>
+							</artifactSet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
