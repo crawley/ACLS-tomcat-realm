@@ -1,0 +1,51 @@
+  <mbeans-descriptors>
+  <mbean         name="ACLSRealm"
+            className="org.apache.catalina.mbeans.ClassNameMBean"
+          description="Custom Realm for aithenticating against ACLS"
+               domain="Catalina"
+                group="Realm"
+                 type="au.edu.uq.cmm.tomcat.ACLSRealm">
+
+    <attribute   name="className"
+          description="Fully qualified class name of the managed object"
+                 type="java.lang.String"
+            writeable="false"/>
+            
+    <attribute   name="digest"
+          description="Digest algorithm - not implementable with ACLS"
+                 type="java.lang.String"
+            writeable="false"/>
+            
+    <attribute   name="serverHost"
+          description="The ACLS server DNS name or IP address"
+                 type="java.lang.String"/>
+                 
+    <attribute   name="serverPort"
+          description="The ACLS server port number"
+                 type="int"/>
+                 
+    <attribute   name="dummyFacility"
+          description="The dummy ACLS facility name to use when authenticating"
+                 type="java.lang.String"/>
+            
+    <attribute   name="realmPath"
+          description="The realm path"
+                 type="java.lang.String"/>
+
+    <attribute   name="stateName"
+          description="The name of the LifecycleState that this component is currently in"
+                 type="java.lang.String"
+                 writeable="false"/>
+
+    <attribute   name="validate"
+          description="The 'validate certificate chains' flag."
+                 type="boolean"/>
+                 
+    <operation name="start" description="Start" impact="ACTION" returnType="void" />
+    <operation name="stop" description="Stop" impact="ACTION" returnType="void" />
+    <operation name="init" description="Init" impact="ACTION" returnType="void" />
+    <operation name="destroy" description="Destroy" impact="ACTION" returnType="void" />
+                 
+  </mbean>
+  </mbeans-descriptors>
+  
