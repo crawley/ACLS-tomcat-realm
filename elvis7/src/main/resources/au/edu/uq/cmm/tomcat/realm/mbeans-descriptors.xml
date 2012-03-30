@@ -27,6 +27,10 @@
     <attribute   name="dummyFacility"
           description="The dummy ACLS facility name to use when authenticating"
                  type="java.lang.String"/>
+                 
+    <attribute   name="localHostId"
+          description="The localHostId to use when authenticating"
+                 type="java.lang.String"/>
             
     <attribute   name="realmPath"
           description="The realm path"
