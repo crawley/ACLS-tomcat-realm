@@ -14,6 +14,7 @@ public class ACLSRealm extends RealmBase {
     private int serverPort = 1024;
     private String dummyFacility;
     private String serverHost;
+    private String localHostId;
     
     protected String getName() {
         return "ACLS";
@@ -56,14 +57,15 @@ public class ACLSRealm extends RealmBase {
                 res = getPrincipal(userName);
             }
         } catch (AclsException ex) {
-            containerLog.error("ACLS authentication failure", ex);
+            containerLog.info("ACLS authentication failure", ex);
         }
         return res;
     }
 
     public void init() {
         super.init();
-        authenticator = new Authenticator(serverHost, serverPort, dummyFacility);
+        authenticator = new Authenticator(
+                serverHost, serverPort, dummyFacility, localHostId);
     }
 
     public int getServerPort() {
@@ -88,5 +90,13 @@ public class ACLSRealm extends RealmBase {
 
     public void setServerHost(String serverHost) {
         this.serverHost = serverHost;
+    }
+
+    public String getLocalHostId() {
+        return localHostId;
+    }
+
+    public void setLocalHostId(String localHostId) {
+        this.localHostId = localHostId;
     }
 }
