@@ -37,7 +37,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>elvis6</finalName>
+		<finalName>elvis7</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
