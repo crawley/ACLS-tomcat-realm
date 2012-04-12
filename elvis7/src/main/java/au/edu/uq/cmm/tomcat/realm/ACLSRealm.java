@@ -1,6 +1,7 @@
 package au.edu.uq.cmm.tomcat.realm;
 import java.security.Principal;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.realm.GenericPrincipal;
@@ -17,6 +18,8 @@ public class ACLSRealm extends RealmBase {
     private String dummyFacility;
     private String serverHost;
     private String localHostId;
+    private List<String> roles = Arrays.asList(
+            new String[]{"ROLE_USER", "ROLE_ACLS_USER"});
     
     @Override
     protected String getName() {
@@ -30,8 +33,7 @@ public class ACLSRealm extends RealmBase {
 
     @Override
     protected Principal getPrincipal(String userName) {
-        return new GenericPrincipal(userName, "",
-                Collections.singletonList("ROLE_USER"));
+        return new GenericPrincipal(userName, "", roles);
     }
 
     @Override
