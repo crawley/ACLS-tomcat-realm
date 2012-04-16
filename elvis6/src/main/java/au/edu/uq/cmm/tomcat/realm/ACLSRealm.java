@@ -28,9 +28,13 @@ public class ACLSRealm extends RealmBase {
     }
 
     protected Principal getPrincipal(String userName) {
-        return new GenericPrincipal(this, userName, "", roles);
+        return getPrincipal(userName, "");
     }
 
+    protected Principal getPrincipal(String userName, String password) {
+        return new GenericPrincipal(this, userName, password, roles);
+    }
+    
     public Principal authenticate(String username, String clientDigest,
             String nonce, String nc, String cnonce,
             String qop, String realm,
@@ -56,7 +60,7 @@ public class ACLSRealm extends RealmBase {
                     containerLog.trace(sm.getString("realmBase.authenticateSuccess",
                             userName));
                 }
-                res = getPrincipal(userName);
+                res = getPrincipal(userName, password);
             }
         } catch (AclsException ex) {
             containerLog.info("ACLS authentication failure", ex);

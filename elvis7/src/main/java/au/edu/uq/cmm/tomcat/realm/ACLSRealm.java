@@ -33,7 +33,11 @@ public class ACLSRealm extends RealmBase {
 
     @Override
     protected Principal getPrincipal(String userName) {
-        return new GenericPrincipal(userName, "", roles);
+        return getPrincipal(userName, "");
+    }
+
+    protected Principal getPrincipal(String userName, String password) {
+        return new GenericPrincipal(userName, password, roles);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class ACLSRealm extends RealmBase {
                 if (containerLog.isTraceEnabled()) {
                     containerLog.trace(sm.getString("realmBase.authenticateSuccess",
                             userName));
-                res = getPrincipal(userName);
+                    res = getPrincipal(userName, password);
                 }
             }
         } catch (AclsException ex) {
