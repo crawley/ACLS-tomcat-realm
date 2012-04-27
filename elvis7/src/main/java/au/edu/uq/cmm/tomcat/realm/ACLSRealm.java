@@ -7,13 +7,13 @@ import org.apache.catalina.LifecycleException;
 import org.apache.catalina.realm.GenericPrincipal;
 import org.apache.catalina.realm.RealmBase;
 
-import au.edu.uq.cmm.aclslib.authenticator.Authenticator;
+import au.edu.uq.cmm.aclslib.authenticator.AclsAuthenticator;
 import au.edu.uq.cmm.aclslib.message.AclsException;
 
 
 public class ACLSRealm extends RealmBase {
     
-    private Authenticator authenticator;
+    private AclsAuthenticator authenticator;
     private int serverPort = 1024;
     private String dummyFacility;
     private String serverHost;
@@ -58,7 +58,7 @@ public class ACLSRealm extends RealmBase {
             } else if (password == null) {
                 containerLog.info("Null j_password");
             }
-            if (!authenticator.authenticate(userName, password)) {
+            if (authenticator.authenticate(userName, password, null) == null) {
                 if (containerLog.isTraceEnabled()) {
                     containerLog.trace(sm.getString("realmBase.authenticateFailure",
                             userName));
@@ -79,7 +79,7 @@ public class ACLSRealm extends RealmBase {
     @Override
     public void startInternal() throws LifecycleException {
         super.startInternal();
-        authenticator = new Authenticator(
+        authenticator = new AclsAuthenticator(
                 serverHost, serverPort, dummyFacility, localHostId);
     }
 
