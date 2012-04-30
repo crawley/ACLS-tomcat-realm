@@ -8,6 +8,7 @@ import org.apache.catalina.realm.GenericPrincipal;
 import org.apache.catalina.realm.RealmBase;
 
 import au.edu.uq.cmm.aclslib.authenticator.AclsAuthenticator;
+import au.edu.uq.cmm.aclslib.message.AclsClient;
 import au.edu.uq.cmm.aclslib.message.AclsException;
 
 
@@ -18,6 +19,7 @@ public class ACLSRealm extends RealmBase {
     private String dummyFacility;
     private String serverHost;
     private String localHostId;
+    private int timeout = AclsClient.ACLS_REQUEST_TIMEOUT * 2;
     private List<String> roles = Arrays.asList(
             new String[]{"ROLE_USER", "ROLE_ACLS_USER"});
     
@@ -80,7 +82,8 @@ public class ACLSRealm extends RealmBase {
     public void startInternal() throws LifecycleException {
         super.startInternal();
         authenticator = new AclsAuthenticator(
-                serverHost, serverPort, dummyFacility, localHostId);
+                serverHost, serverPort, timeout, 
+                dummyFacility, localHostId);
     }
 
     public int getServerPort() {
@@ -113,5 +116,13 @@ public class ACLSRealm extends RealmBase {
 
     public void setLocalHostId(String localHostId) {
         this.localHostId = localHostId;
+    }
+
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 }
